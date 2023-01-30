@@ -1,9 +1,9 @@
 import React, { Component, useEffect, useState } from 'react'
 import { CheckBox,Text, View,StatusBar, TextInput ,StyleSheet,Image,FlatList} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-// import Checkbox from 'expo-checkbox';
 
-function Flatlist(){
+function Flatlist({route,navigation}){
+  const name=route.params.userName;
+  // console.log(route.params.userName);
   const [data,setData]=useState([]);
   useEffect(()=>{
     fetch("https://dummyjson.com/users").then((resp)=>{
@@ -14,13 +14,14 @@ function Flatlist(){
   },[])
   return(     
   <View style={styles.container}>
-    <StatusBar />
+    <StatusBar backgroundColor={'black'}/>
     <FlatList
     data={data} 
     // horizontal
     renderItem={(ele)=>{
       return (
       <View style={styles.cardContainer}>
+        <Text>{`Hi ${name}`}</Text>
         <View style={styles.card}>
           <Image style={styles.Images}source={{uri:ele.item.image}}/>
           <View style={styles.imageDescription}>
